@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Shape{
+    public:
+    Shape(){};
+    virtual Shape *A(float size_a) = 0;
+    virtual Shape *B(float size_b) = 0;
+};
+
+
+class Figure_M : public Shape{
+    public:
+    Figure_M *A(float size_a) override;
+    Figure_M *B(float size_b) override;
+    private:
+    string m;
+};
+
+class Figure_CM : public Shape{
+    public:
+    Figure_CM *A(float size_a) override;
+    Figure_CM *B(float size_b) override;
+    private:
+    string cm;
+    
+};
+
+class Rectangle : public Shape{
+    private:
+    Rectangle *A(float size_a) override;
+    
+    public:
+    Rectangle (const std::string &unit, Shape *size_a, Shape *size_b);
+    void PrintInfo();
+    void Area(){return (size_a)*(size_b)};
+    
+}
+
+
+Rectangle::Rectangle(const std::string &unit, Shape *size_a, Shape *size_b) : unit(unit), size_a(size_a), size_b(size_b) {}
+void Rectangle::PrintInfo(){
+    std::cout<< "side A: " << this->size_a << "side B: " << this->size_b<< this->unit << std::endl;
+}
+
+
+int main()
+{
+    Shape *m = Figure_M(0.5f, 0.8f);
+    Shape *cm = Figure_CM(13, 6);
+   
+   Rectangle fig1("m", 0.7f, 0.7f);
+   Rectangle fig2("cm", 55.0f, 66.0f);
+   
+   fig1.PrintInfo();
+   fig2.PrintInfo();
+   
+
+    return 0;
+}
