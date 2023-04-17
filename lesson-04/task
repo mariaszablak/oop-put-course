@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <optional>
+
+
+using namespace std;
+class Task{
+    private:
+    string function;
+    public:
+    Task ToDo(std::string newFunction){
+        this->function= std::move(newFunction);
+        return *this;
+    }
+    string CurrentTask(){
+        return this->function;
+    }
+};
+class Group{
+    private: 
+    std::string name;
+    std::optional<std::vector<Task>>groupsTasks;
+    public:
+    void NameGroup (std::string groupsNewName){
+        this->name= move(groupsNewName);
+    }
+    void GiveTask (const Task &task){
+        this-> groupsTasks ->push_back(task); 
+    };
+    
+    Task FinishedTask (){
+        Task finishedFunction = this-> groupsTasks->back();
+        this -> groupsTasks-> pop_back();
+        return finishedFunction;
+    }
+};
+    
+ 
+int main()
+{
+    Group groupOne;
+    groupOne.NameGroup("First");
+    Task task;
+    Task newTask = task.ToDo("Cleaning");
+    groupOne.GiveTask(newTask);
+    Task nowTask = groupOne.FinishedTask();
+    cout << "First"<< endl;
+    cout << nowTask.CurrentTask();
+    
+    return 0;
+}
