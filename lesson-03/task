@@ -1,0 +1,32 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+class Book {
+    private:
+        double pages;
+        string author;
+        
+    public:
+        double N () {return this-> pages; };
+        string A() {return this -> author; };
+        Book() { this-> pages = 0.0 ; };
+        Book(string name) {this-> author = name;} ;
+        Book(double number) {this-> pages = number;} ;
+        Book(int number) : Book(static_cast<double>(number)) {};
+        Book(float number) : Book(static_cast<double>(number)) {};
+        
+};
+
+
+int main()
+{
+    Book intPages(123);
+    Book floatPages(125.5f);
+    Book stringAuthor("Jan Kowalski");
+    std::cout << intPages.N() << std:: endl;
+    std::cout << floatPages.N() << std:: endl;
+    std::cout << stringAuthor.A() << std:: endl;
+    return 0;
+}
