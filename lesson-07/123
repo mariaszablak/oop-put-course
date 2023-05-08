@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <stdexcept>
+
+class LogException: public std::runtime_error {
+    public:
+    explicit LogException (const std::string& message)
+    : std:: runtime_error(message) {}
+};
+
+class Logarithm {
+ public:
+  Logarithm(double base, double argument) {
+    base_ = base;
+    argument_ = argument; 
+    
+    
+  }
+
+  double Calculate() const {  
+    
+    if (base_<=0 || base_==1){
+    throw LogException("Base Error");
+}
+
+    
+    if (argument_<=0){
+    throw LogException("Argument Error");
+}
+    return std::log(argument_) / std::log(base_);
+  }
+
+ private:
+  double base_;
+  double argument_;
+};
+
+
+
+
+     
+  
+
+
+int main(){
+    double a;
+    double b;
+    std::cout << "Podaj wartosc podstawy " << std::endl;
+    std::cin>>b;
+    std::cout << "Podaj wartosc argumentu "  << std::endl;
+    std::cin>>a;
+    
+    try {
+    Logarithm logarithm(b, a);
+    std::cout<< logarithm.Calculate()<<std::endl;
+    } catch (const LogException &e){
+        std::cerr << e.what()<<std::endl;
+        
+    }
+    
+    
+    return 0;
+}
+    
