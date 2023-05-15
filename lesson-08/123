@@ -1,0 +1,73 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Product{
+    private:
+    string Product_Name;
+    double Product_Price;
+    int Product_ID;
+    
+    public:
+    Product Name(std::string newProduct_Name){
+        this->Product_Name= std::move(newProduct_Name);
+        return *this;
+    }
+    Product Price(double newProduct_Price){
+        this->Product_Price= newProduct_Price;
+        return *this;
+    }
+    
+    
+};
+
+class Customer{
+    private:
+    string Customer_Name;
+    string Customer_Email;
+    int Customer_ID;
+    
+    public:
+    Customer Name(std::string newCustomer_Name){
+        this->Customer_Name= std::move(newCustomer_Name);
+        return *this;}
+        
+    Customer Email(std::string newCustomer_Email){
+        this->Customer_Email= std::move(newCustomer_Email);
+        return *this;}
+};
+
+
+class Order{
+    private:
+    std::vector<Product> products;
+    public:
+    int Order_ID;
+    double Order_Cost;
+    void add_product(Product Name) {
+        products.push_back(Name);
+    };
+    int total_cost(Product Price){
+        return total_cost+=Price;
+    };
+};
+
+int main()
+{
+    Product Pen;
+    Pen.Name("Pen");
+    Pen.Price(2);
+    
+    Product Book;
+    Book.Name("Book1");
+    Book.Price(20);
+    
+    Order N;
+    N.Order_ID=123;
+    N.add_product(Pen);
+    N.add_product(Book);
+    N.total_cost(Pen);
+    N.total_cost(Book);
+    return 0;
+}
