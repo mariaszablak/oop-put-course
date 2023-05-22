@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class IntegerSequence {
+    public:
+    virtual vector<int> Numbers()=0;
+};
+
+class VectorSequence : public IntegerSequence {
+    private:
+    vector<int> vector_sequence;
+    
+    public:
+    VectorSequence (vector<int> vector_sequence){
+        this->vector_sequence= vector_sequence;
+    }
+    vector<int> Numbers() override{
+        return vector_sequence;
+    }
+};
+
+class PositiveSequence : public IntegerSequence{
+    private:
+    IntegerSequence* is;
+    
+    public:
+    PositiveSequence (IntegerSequence* input){
+        this-> is= input;
+    }
+    vector<int> Numbers() override{
+        vector<int> tpm= is->Numbers();
+        for(int i=0; i<tpm.size(); i++)
+        {
+            if (tpm[i]<0)
+            tpm.earse(tpm.begin() + i);
+        }
+        return tpm;
+    }
+   
+    
+};
+
+class EvenSequence : public IntegerSequence{
+    private:
+    vector<int> even_sequence;
+    
+    public:
+    void Numbers() override{
+    Number = even_sequence->Numbers();
+    EvenSequence make_even (even_sequence){
+        if (Number % 2 != 0)
+        {
+            even_sequence.push_back(Number);
+        }
+    }
+    }
+};
+
+class SortedSequence : public IntegerSequence{
+    private:
+    vector<int> sorted_sequence;
+    
+    public:
+    Numbers() override{
+    Number = sorted_sequence->Numbers();
+        
+    }
+};
+
+int main()
+{
+    VectorSequence object = (2, 8, 5, -3);
+    
+    
+    return 0;
+}
