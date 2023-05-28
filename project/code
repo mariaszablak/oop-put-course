@@ -1,0 +1,130 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+class Calculator{
+    
+    private:
+    double number1;
+    double number2;
+    
+    public:
+    
+    Calculator ()
+    {
+        number1 = 0;
+        number2 = 0;
+    }
+    
+    Calculator calculate(double a, double b){
+        this->number1=a;
+        this->number2=b;
+    }
+    
+    double add(double a, double b) {
+    return a + b;}
+
+    double subtract(double a, double b) {
+    return a - b;}
+
+    double multiply(double a, double b) {
+    return a * b;}
+    
+    double divide(double a, double b) {
+    if (b != 0){
+      return a / b;
+    } else {
+      throw "Cannot divide by zero!";}}
+};
+
+class ScientificCalculator : public Calculator {
+
+    public:
+    double power(double base, double exponent){
+    return pow(base, exponent);}
+    
+    double sinus(double angle) {
+    return sin(angle);
+    }
+    
+    double cosinus(double angle) {
+    return cos(angle);
+    }
+    
+    double tanges(double angle) {
+    return tan(angle);
+    }
+};
+
+int main()
+{
+    Calculator calculator;
+    ScientificCalculator scientific_calculator;
+    double a,b;
+    char operation;
+    std::cout << "Give two numbers and put the sign of the operation you want to calculate e.g. 1+2, 3^2, 8/2" <<endl;
+    std::cout << "If you want to calculate sin/cos/tang, enter number and first letter of action e.g. 0.25 s" << endl;
+    
+    while (true) {
+        std::cin >> a >> operation;
+        
+        if (operation == '+' || operation == '-' || operation == '*' || operation == '^'){
+            std::cin >> b;
+        }
+        
+    
+    try{
+    
+    if(operation == '+'){
+        std::cout << calculator.add(a,b) << endl;
+    }
+    
+    if(operation == '-'){
+        std::cout << calculator.subtract(a,b) << endl;
+    }
+    
+    if(operation == '*'){
+        std::cout << calculator.multiply(a,b) << endl;
+    }
+    
+    if(operation == '/'){
+        std::cout << calculator.divide(a,b) << endl;
+    }
+   
+    if(operation == '^'){
+        std::cout << scientific_calculator.power(a,b) << endl;
+    }
+    
+    if (operation == 's') {
+        std::cout << scientific_calculator.sinus(a) << endl;
+    }   
+    
+    if (operation == 'c') {
+        std::cout << scientific_calculator.cosinus(a) << endl;
+    }   
+    
+    if (operation == 't') {
+        std::cout << scientific_calculator.tanges(a) << endl;
+    }
+    
+    if(operation != '+' && operation != '-' && operation != '*' && operation != '/' && operation != '^' && operation != 's' && operation != 'c' && operation !='t'){
+        std::cout << "Invalid operation" << endl;
+    }
+    
+    }catch (const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+        char choice;
+        std::cout << "Do you want to do another operation? (y/n): ";
+        std::cin >> choice;
+
+        if (choice != 'y') {
+            break;
+        }
+        
+    }
+
+    return 0;
+}
