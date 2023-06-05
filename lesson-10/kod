@@ -1,0 +1,48 @@
+#include <iostream>
+#include <thread>
+#include <vector>
+#include <string>
+#include <cstring>
+
+std::mutex mtm;
+
+void calculate(std::string sequence) {
+    int a, c, g, t;
+    int n = sequence.length(); 
+    char* char_seq = new char[n+1];
+    strcpy(char_seq, sequence.c_str());
+    
+    for(int j=0; j<n; j++) {
+        if(char_seq[j] == 'A')
+            a++;
+        if(char_seq[j] == 'C')
+            c++;
+        if(char_seq[j] == 'G')
+            g++;
+        if(char_seq[j] == 'T')
+            t++;
+    }
+}
+
+void devide(std::string DNA, int start, int end) {
+    int seq_lenght = 4;
+    
+    for(int i= start; i<end; i+= seq_lenght){
+        std::string sequence = DNA.substr(i, seq_lenght);
+        calculate(sequence);  
+    }
+}
+
+
+
+int main()
+{
+    std::string DNA;
+    std::cin>>DNA;
+    int end = DNA.length();
+    std::vector<std::thread>threads;
+    std::thread deviding_thread(devide(DNA, 0, end));
+   // for (auto& t : threads){t.join(); }
+
+    return 0;
+}
